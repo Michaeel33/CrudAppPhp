@@ -15,6 +15,7 @@ class PersonalData {
         $this->conn = $db;
     }
 
+
     public function read() {
         $query = "SELECT * FROM " . $this->table_name;
         $stmt = $this->conn->prepare($query);
@@ -22,10 +23,32 @@ class PersonalData {
         return $stmt;
     }
 
+
+    public function readOne($id) {
+        $query = "SELECT * FROM " . $this->table_name . " WHERE perId = :perId LIMIT 1";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":perId", $id);
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+        if ($row) {
+            $this->perId = $row['perId'];
+            $this->firstName = $row['firstName'];
+            $this->lastName = $row['lastName'];
+            $this->ulica = $row['ulica'];
+            $this->mesto = $row['mesto'];
+            $this->psc = $row['psc'];
+        }
+
+        return $row;
+    }
+
+
     public function create() {
         $query = "INSERT INTO " . $this->table_name . " (firstName, lastName, ulica, mesto, psc) 
-              VALUES (:firstName, :lastName, :ulica, :mesto, :psc)";
-
+                  VALUES (:firstName, :lastName, :ulica, :mesto, :psc)";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(":firstName", $this->firstName);
@@ -36,9 +59,12 @@ class PersonalData {
 
         return $stmt->execute();
     }
+
 
     public function update() {
-        $query = "UPDATE " . $this->table_name . " SET firstName=:firstName, lastName=:lastName, ulica=:ulica, mesto=:mesto, psc=:psc WHERE perId=:perId";
+        $query = "UPDATE " . $this->table_name . " 
+                  SET firstName=:firstName, lastName=:lastName, ulica=:ulica, mesto=:mesto, psc=:psc 
+                  WHERE perId=:perId";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(":perId", $this->perId);
@@ -51,16 +77,11 @@ class PersonalData {
         return $stmt->execute();
     }
 
+
     public function delete() {
-
         $query = "DELETE FROM " . $this->table_name . " WHERE perId = :perId";
-
         $stmt = $this->conn->prepare($query);
-
-
         $stmt->bindParam(":perId", $this->perId);
-
-
         return $stmt->execute();
     }
 }

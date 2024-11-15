@@ -17,7 +17,7 @@ $stmt = $personalData->read();
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-<h1>Personal Data</h1>
+<h1>System pre ziskavanie adries - Posta</h1>
 <a href="create.php">Add New Entry</a>
 <table border="1">
     <tr>

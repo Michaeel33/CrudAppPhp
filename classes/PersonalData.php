@@ -52,9 +52,15 @@ class PersonalData {
     }
 
     public function delete() {
-        $query = "DELETE FROM " . $this->table_name . " WHERE perId=:perId";
+
+        $query = "DELETE FROM " . $this->table_name . " WHERE perId = :perId";
+
         $stmt = $this->conn->prepare($query);
+
+
         $stmt->bindParam(":perId", $this->perId);
+
+
         return $stmt->execute();
     }
 }

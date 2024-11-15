@@ -6,15 +6,15 @@ $database = new Database();
 $db = $database->getConnection();
 
 if (isset($_GET['id'])) {
-    // Načítaj záznam z databázy podľa ID
+
     $personalData = new PersonalData($db);
     $personalData->perId = $_GET['id'];
 
-    $stmt = $personalData->read();  // Predpokladáme, že read() metóda načíta záznam podľa ID
+    $stmt = $personalData->read();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($row) {
-        // Predvyplni formulár údajmi
+
         $firstName = $row['firstName'];
         $lastName = $row['lastName'];
         $ulica = $row['ulica'];
@@ -30,7 +30,7 @@ if (isset($_GET['id'])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Aktualizovanie údajov po odoslaní formuláru
+
     $personalData->firstName = $_POST['firstName'];
     $personalData->lastName = $_POST['lastName'];
     $personalData->ulica = $_POST['ulica'];
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($personalData->update()) {
         echo "Record updated successfully!";
-        header("Location: index.php");  // Presmerovanie na hlavný zoznam po úspešnej aktualizácii
+        header("Location: index.php");
         exit;
     } else {
         echo "Unable to update the record!";

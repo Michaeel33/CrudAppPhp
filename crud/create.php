@@ -2,11 +2,10 @@
 require '../classes/Database.php';
 require '../classes/PersonalData.php';
 
-// Vytvorenie spojenia s databázou
 $database = new Database();
 $db = $database->getConnection();
 
-// Ak je formulár odoslaný, pridáme nový záznam
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $personalData = new PersonalData($db);
     $personalData->firstName = $_POST['firstName'];
@@ -17,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($personalData->create()) {
         echo "New record added successfully!";
-        header("Location: index.php");  // Presmerovanie na hlavný zoznam po úspešnom pridaní
+        header("Location: index.php");
         exit;
     } else {
         echo "Unable to add the new record!";

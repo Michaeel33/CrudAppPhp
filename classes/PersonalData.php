@@ -23,7 +23,9 @@ class PersonalData {
     }
 
     public function create() {
-        $query = "INSERT INTO " . $this->table_name . " SET firstName=:firstName, lastName=:lastName, ulica=:ulica, mesto=:mesto, psc=:psc";
+        $query = "INSERT INTO " . $this->table_name . " (firstName, lastName, ulica, mesto, psc) 
+              VALUES (:firstName, :lastName, :ulica, :mesto, :psc)";
+
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(":firstName", $this->firstName);

@@ -32,8 +32,8 @@ $stmt = $personalData->read();
     <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
         <tr>
             <td><?= $row['perId'] ?></td>
-            <td><?= $row['firstName'] ?></td>
-            <td><?= $row['lastName'] ?></td>
+            <td><?= $row['firstname'] ?></td>
+            <td><?= $row['lastname'] ?></td>
             <td><?= $row['ulica'] ?></td>
             <td><?= $row['mesto'] ?></td>
             <td><?= $row['psc'] ?></td>

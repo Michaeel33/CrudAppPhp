@@ -22,8 +22,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `personaldata` (
   `perId` int(11) NOT NULL,
-  `firstName` varchar(50) DEFAULT NULL,
-  `lastName` varchar(50) DEFAULT NULL,
+  `firstname` varchar(50) DEFAULT NULL,
+  `lastname` varchar(50) DEFAULT NULL,
   `ulica` varchar(100) DEFAULT NULL,
   `mesto` varchar(50) DEFAULT NULL,
   `psc` varchar(10) DEFAULT NULL
@@ -33,7 +33,7 @@ CREATE TABLE `personaldata` (
 -- Sťahujem dáta pre tabuľku `personaldata`
 --
 
-INSERT INTO `personaldata` (`perId`, `firstName`, `lastName`, `ulica`, `mesto`, `psc`) VALUES
+INSERT INTO `personaldata` (`perId`, `firstname`, `lastname`, `ulica`, `mesto`, `psc`) VALUES
 (1, 'Jozef', 'Novak', 'Hlavná 12', 'Bratislava', '81101'),
 (2, 'Anna', 'Kováčová', 'Štúrova 5', 'Košice', '04001'),
 (3, 'Peter', 'Horváth', 'Jarná 9', 'Prešov', '08001'),

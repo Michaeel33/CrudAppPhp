@@ -1,26 +1,20 @@
 <?php
 require '../classes/Database.php';
 require '../classes/PersonalData.php';
-
+require '../ViewHtml/deleteView.php';
 
 $database = new Database();
 $db = $database->getConnection();
 
+$personalData = new PersonalData($db);
+$personalData->perId = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
 
-if (isset($_GET['id'])) {
-
-    $personalData = new PersonalData($db);
-    $personalData->perId = $_GET['id'];
-
-
-    if ($personalData->delete()) {
-        echo "Record deleted successfully!";
-        header("Location: index.php");
-        exit;
-    } else {
-        echo "Unable to delete the record!";
-    }
+if ($personalData->delete()) {
+    $message = "Record was deleted.";
 } else {
-    echo "No ID parameter provided!";
-    exit;
+    $message = "Unable to delete record.";
 }
+
+$view = new DeleteView();
+$view->render($message);
+?>

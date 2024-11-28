@@ -5,8 +5,8 @@ class PersonalData {
     private $table_name = "personaldata";
 
     public $perId;
-    public $firstName;
-    public $lastName;
+    public $firstname;
+    public $lastname;
     public $ulica;
     public $mesto;
     public $psc;
@@ -35,8 +35,8 @@ class PersonalData {
 
         if ($row) {
             $this->perId = $row['perId'];
-            $this->firstName = $row['firstName'];
-            $this->lastName = $row['lastName'];
+            $this->firstname = $row['firstname'];
+            $this->lastname = $row['lastname'];
             $this->ulica = $row['ulica'];
             $this->mesto = $row['mesto'];
             $this->psc = $row['psc'];
@@ -47,12 +47,12 @@ class PersonalData {
 
 
     public function create() {
-        $query = "INSERT INTO " . $this->table_name . " (firstName, lastName, ulica, mesto, psc) 
-                  VALUES (:firstName, :lastName, :ulica, :mesto, :psc)";
+        $query = "INSERT INTO " . $this->table_name . " (firstname, lastname, ulica, mesto, psc) 
+                  VALUES (:firstname, :lastname, :ulica, :mesto, :psc)";
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindParam(":firstName", $this->firstName);
-        $stmt->bindParam(":lastName", $this->lastName);
+        $stmt->bindParam(":firstname", $this->firstname);
+        $stmt->bindParam(":lastname", $this->lastname);
         $stmt->bindParam(":ulica", $this->ulica);
         $stmt->bindParam(":mesto", $this->mesto);
         $stmt->bindParam(":psc", $this->psc);
@@ -63,13 +63,13 @@ class PersonalData {
 
     public function update() {
         $query = "UPDATE " . $this->table_name . " 
-                  SET firstName=:firstName, lastName=:lastName, ulica=:ulica, mesto=:mesto, psc=:psc 
+                  SET firstname=:firstname, lastname=:lastname, ulica=:ulica, mesto=:mesto, psc=:psc 
                   WHERE perId=:perId";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(":perId", $this->perId);
-        $stmt->bindParam(":firstName", $this->firstName);
-        $stmt->bindParam(":lastName", $this->lastName);
+        $stmt->bindParam(":firstname", $this->firstname);
+        $stmt->bindParam(":lastname", $this->lastname);
         $stmt->bindParam(":ulica", $this->ulica);
         $stmt->bindParam(":mesto", $this->mesto);
         $stmt->bindParam(":psc", $this->psc);
